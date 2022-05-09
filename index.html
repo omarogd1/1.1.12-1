@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://jsxgraph.org/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <div style="display: grid; grid-template-columns: 10% 80% 10%; grid-template-rows: auto auto auto;">
+        <div style="grid-column: 2/3;grid-row: 1/2;">
+            <div style="margin: 0 auto;">
+                <h6 style="display: block; text-align: center; background-color: #f4f8ff; color: #00447c; padding: 2%; margin: 1% 15% 2% 15%;">
+                    Actividad de clase
+                </h6>
+                <p style="text-align: center"><span style="color: block;">Representación gráfica de números complejos que permite su orden parcial</p>
+            </div>
+
+        </div>
+        <div style="grid-column: 2/3;grid-row: 2/3; margin: 0 auto; display: inline-block; padding-bottom: 8%;">
+            <div id="box" class="jxgbox" style="width:600px; height:600px;">
+                <script type="text/javascript">
+                    JXG.Options.text.cssdefaultstyle = 'font-family: Fira Sans, sans-serif;'
+                    var brd = JXG.JSXGraph.initBoard('box', {
+                        boundingbox: [-6, 6, 6, -6],
+                        axis: true,
+                        showCopyright: false
+                    });
+                    var a = brd.create('slider', [
+                        [-5, -1],
+                        [-2, -1],
+                        [-5, 1, 5]
+                    ], {
+                        name: 'a'
+                    });
+                    var b = brd.create('slider', [
+                        [-5, -2],
+                        [-2, -2],
+                        [-5, 2, 5]
+                    ], {
+                        name: 'b'
+                    });
+                    var org = brd.create('point', [0, 0], {
+                        name: '',
+                        fill: '',
+                        strokeWidth: 0.1,
+                        visible: false
+                    });
+                    var p = brd.create('point', [function() {
+                        return a.Value()
+                    }, function() {
+                        return b.Value()
+                    }], {
+                        name: 'a+bi',
+                        fontUnit: 'vmin',
+                        fontSize: 2
+                    });
+                    var a1 = brd.create('arrow', [org, p], {
+                        strokeColor: 'black',
+                        strokeWidth: 2
+                    });
+                    var bl = brd.create('line', [p, [function() {
+                        return p.X();
+                    }, 0]], {
+                        attractToGrid: true,
+                        attractorDistance: 10,
+                        attractorunit: 'screen',
+                        name: ' ',
+                        color: '#0A5EB0'
+                    });
+                    var bll = brd.create('line', [p, [0, function() {
+                        return p.Y();
+                    }]], {
+                        attractToGrid: true,
+                        attractorDistance: 10,
+                        attractorunit: 'screen',
+                        name: ' ',
+                        color: '#FF5572'
+                    });
+                    var text = brd.create('text', [-3, function() {
+                        return p.Y() + 0.3;
+                    }, function() {
+                        return JXG.toFixed(a.Value(), 1.0) + "i" + " Imaginario";
+                    }], {
+                        fontUnit: 'vmin',
+                        fontSize: 2,
+                        color: '#FF5572'
+                    });
+                    var text = brd.create('text', [function() {
+                        return p.X() + 0.3;
+                    }, -2, function() {
+                        return JXG.toFixed(b.Value(), 1.0) + " Real";
+                    }], {
+                        fontUnit: 'vmin',
+                        fontSize: 2,
+                        color: '#0A5EB0'
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
